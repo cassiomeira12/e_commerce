@@ -4,16 +4,14 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../shared/notifications/local_notifications.dart';
-
 class FirebasePushNotifications {
   FirebaseMessaging _firebaseMessaging;
-  LocalNotification localNotifications;
+  //LocalNotification localNotifications;
 
   FirebasePushNotifications() {
-    localNotifications = LocalNotification(
-      onSelectNotification: onSelectNotification,
-    );
+    // localNotifications = LocalNotification(
+    //   onSelectNotification: onSelectNotification,
+    // );
     _firebaseMessaging = FirebaseMessaging();
     firebaseCloudMessagingListeners();
   }
@@ -102,11 +100,11 @@ class FirebasePushNotifications {
   }
 
   void showLocalPushNotification(title, body, payload) {
-    localNotifications.showNotification(
-      title: title,
-      body: body,
-      payload: payload,
-    );
+    // localNotifications.showNotification(
+    //   title: title,
+    //   body: body,
+    //   payload: payload,
+    // );
   }
 
   void iOSPermission() {

@@ -6,6 +6,7 @@ import 'package:e_commerce/app/modules/home/subroutes/contact/contact_page.dart'
 import 'package:e_commerce/app/modules/home/subroutes/initial/initial_page.dart';
 import 'package:e_commerce/app/modules/home/subroutes/lookbook/lookbook_page.dart';
 import 'package:e_commerce/app/modules/home/subroutes/lore/lore_page.dart';
+import 'package:e_commerce/app/modules/home/subroutes/shop/shop_page.dart';
 import 'package:e_commerce/app/styles/font_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,8 +29,12 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     menuItems = [
       {
-        'value': 'Shop',
+        'value': 'Home',
         'page': InitialPage(),
+      },
+      {
+        'value': 'Shop',
+        'page': ShopPage(),
       },
       {
         'value': 'Lookbook',
