@@ -1,3 +1,4 @@
+import 'package:e_commerce/app/styles/font_style.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -58,7 +59,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: darkTheme().copyWith(canvasColor: Color(0xFF273443)),
+      data: darkTheme().copyWith(canvasColor: Colors.black),
       child: Drawer(
         elevation: 2,
         child: ListView(
@@ -101,9 +102,9 @@ class _DrawerWidgetState extends State<DrawerWidget> {
       child: Column(
         children: [
           FlatButton(
-            color: widget.categoryIndex == index
-                ? Theme.of(context).primaryColorLight
-                : Theme.of(context).hintColor.withOpacity(0.2),
+            // color: widget.categoryIndex == index
+            //     ? Theme.of(context).primaryColorLight
+            //     : Theme.of(context).hintColor.withOpacity(0.2),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5),
             ),
@@ -122,7 +123,12 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                             child: Icon(data['icon']),
                           ),
                           SizedBox(width: 8),
-                          Flexible(child: Text(data['value'])),
+                          Flexible(
+                            child: Text(
+                              data['value'],
+                              style: fontButton(context),
+                            ),
+                          ),
                         ],
                       ),
                     ),

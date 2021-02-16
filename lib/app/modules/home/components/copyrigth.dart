@@ -10,7 +10,7 @@ class CopyRigth extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      //color: Colors.red,
+      color: Colors.black,
       //margin: EdgeInsets.only(top: 100),
       padding: EdgeInsets.only(left: 50, right: 50, top: 7, bottom: 7),
       child: Wrap(
@@ -21,7 +21,7 @@ class CopyRigth extends StatelessWidget {
             padding: EdgeInsets.all(10),
             child: Text(
               '© Copyright ${APP_NAME}. Todos os direitos reservados. ',
-              style: fontSubtitle(context, size: 15),
+              style: fontSubtitle(context, size: 15, color: Colors.white),
             ),
           ),
           Wrap(
@@ -30,21 +30,21 @@ class CopyRigth extends StatelessWidget {
               FlatButton(
                 child: Text(
                   "Newsletter",
-                  style: fontSubtitle(context, size: 15),
+                  style: fontSubtitle(context, size: 15, color: Colors.white),
                 ),
                 onPressed: () => Get.toNamed('/termos_de_uso'),
               ),
               FlatButton(
                 child: Text(
                   "Institucional",
-                  style: fontSubtitle(context, size: 15),
+                  style: fontSubtitle(context, size: 15, color: Colors.white),
                 ),
                 onPressed: () => Get.toNamed('/politica-de-privacidade'),
               ),
               FlatButton(
                 child: Text(
                   "Formas de Envio",
-                  style: fontSubtitle(context, size: 15),
+                  style: fontSubtitle(context, size: 15, color: Colors.white),
                 ),
                 onPressed: () => Get.toNamed('/politica-de-privacidade'),
               ),
@@ -76,7 +76,7 @@ class CopyRigth extends StatelessWidget {
                   margin: EdgeInsets.symmetric(horizontal: 5),
                   child: FaIcon(
                     FontAwesomeIcons.instagram,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ),
                 onTap: () async {

@@ -147,7 +147,7 @@ class _HomePageState extends State<HomePage> {
                     return FlatButton(
                       child: Text(
                         e.value['value'].toUpperCase(),
-                        style: fontTitle(context, size: 20, bold: true),
+                        style: fontSubtitle(context, size: 20, bold: true),
                       ),
                       onPressed: () {
                         if (e.value['action'] == null) {
