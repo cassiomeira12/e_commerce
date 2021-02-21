@@ -170,7 +170,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
       child: Column(
         children: <Widget>[
           textTitle(),
-          GenerateForm(data: formData),
+          GenerateForm(fields: formData),
         ],
       ),
     );

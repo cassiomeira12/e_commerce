@@ -69,7 +69,7 @@ class _NewCompanyPageState extends State<NewCompanyPage> {
       child: Column(
         children: [
           CardPage(
-            child: GenerateForm(data: form),
+            child: GenerateForm(fields: form),
           ),
         ],
       ),

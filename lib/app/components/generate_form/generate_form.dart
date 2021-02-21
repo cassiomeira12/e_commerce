@@ -6,9 +6,9 @@ import '../text_input/area_input_field.dart';
 import '../text_input/text_input_field.dart';
 
 class GenerateForm extends StatefulWidget {
-  dynamic data;
+  dynamic fields;
 
-  GenerateForm({@required this.data});
+  GenerateForm({@required this.fields});
 
   @override
   _GenerateFormState createState() => _GenerateFormState();
@@ -20,18 +20,20 @@ class _GenerateFormState extends State<GenerateForm> {
   final booleans = Map<String, bool>();
   final spinners = Map<String, dynamic>();
 
-  dynamic data = {
+  dynamic fields = {
     "fields": [
       {
         "field": "title",
         "initial": "cassio",
         "type": "textField",
         "title": "Teste 1",
+        "return": true,
       },
       {
         "field": "message",
         "type": "textArea",
         "title": "Teste 2",
+        "return": false,
       },
       {
         "field": "ativo",
@@ -64,9 +66,9 @@ class _GenerateFormState extends State<GenerateForm> {
         "type": "button",
         "title": "Salvar",
         "validateRequired": false,
-        "action": (data2) {
-          print("Result");
-          print(data2);
+        "action": (data) {
+          //print("Result");
+          //print(data);
         },
       }
     ]
@@ -75,8 +77,8 @@ class _GenerateFormState extends State<GenerateForm> {
   @override
   void initState() {
     super.initState();
-    if (widget.data == null) {
-      widget.data = data;
+    if (widget.fields == null) {
+      widget.fields = fields;
     }
   }
 
@@ -88,7 +90,7 @@ class _GenerateFormState extends State<GenerateForm> {
         padding: EdgeInsets.symmetric(vertical: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
-          children: List.from(widget.data['fields']).map((e) {
+          children: List.from(widget.fields['fields']).map((e) {
             return checkType(e);
           }).toList(),
         ),
@@ -138,22 +140,18 @@ class _GenerateFormState extends State<GenerateForm> {
             ? TextCapitalization.none
             : data['textCapitalization'] ?? TextCapitalization.sentences,
         keyboardType: data['textInputType'],
+        validator: data['validator'],
         onChanged: (value) => data['result'] = value.trim(),
         onSaved: (value) => data['result'] = value.trim(),
-        validator: data['validator'],
       ),
     );
   }
 
   Widget textArea(data) {
     if (!controllers.containsKey(data['field'])) {
-      if (data['controller'] == null) {
-        controllers[data['field']] = data['initial'] != null
-            ? TextEditingController(text: data['initial'].toString())
-            : TextEditingController();
-      } else {
-        controllers[data['field']] = data['controller'];
-      }
+      controllers[data['field']] = data['controller'] ?? data['initial'] != null
+          ? TextEditingController(text: data['initial'].toString())
+          : TextEditingController();
       data['result'] = data['initial'].toString();
     }
     return Padding(
@@ -165,9 +163,9 @@ class _GenerateFormState extends State<GenerateForm> {
           maxLines: data["maxLines"] ?? 5,
           enable: data['enable'] ?? true,
           keyboardType: data['textInputType'],
+          validator: data['validator'],
           onChanged: (value) => data['result'] = value.trim(),
           onSaved: (value) => data['result'] = value.trim(),
-          validator: data['validator'],
         ),
       ),
     );
@@ -348,11 +346,11 @@ class _GenerateFormState extends State<GenerateForm> {
           onPressed: () {
             if (data['validateRequired']) {
               if (validateAndSave()) {
-                data['action']?.call(generateDataResult(widget.data));
+                data['action']?.call(generateDataResult(widget.fields));
               }
             } else {
               data['action']?.call(
-                generateDataResult(widget.data),
+                generateDataResult(widget.fields),
               );
             }
           },
@@ -364,7 +362,7 @@ class _GenerateFormState extends State<GenerateForm> {
   generateDataResult(data) {
     var result = Map<String, dynamic>();
     List.from(data['fields']).forEach((e) {
-      if (e['field'] != null) {
+      if (e['field'] != null && (e['return'] == null || e['return'])) {
         result[e['field']] = convertToInitialType(
           e['initial'],
           e['result'],
@@ -378,14 +376,14 @@ class _GenerateFormState extends State<GenerateForm> {
     if (initial == null) {
       return value;
     }
-    print("[$initial] -> [${initial.runtimeType}]");
+    //print("[$initial] -> [${initial.runtimeType}]");
     switch (initial.runtimeType) {
       case int:
         return int.parse(value);
       case double:
         return double.parse(value);
       case bool:
-        return bool.fromEnvironment(value);
+        return value == 'true';
       default:
         return value;
     }

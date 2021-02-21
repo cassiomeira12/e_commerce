@@ -2,11 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:global_configuration/global_configuration.dart';
 
-class ContactController extends GetxController {
-  sendContact({name, phoneNumber, subject, message}) async {
+class NewsletterController extends GetxController {
+  sendNewsletter({email, firstname, lastname, phonenumber}) async {
     var dio = Dio();
     var response = await dio.post(
-      "${GlobalConfiguration().appConfig['SERVER_URL']}/classes/Contact",
+      "${GlobalConfiguration().appConfig['SERVER_URL']}/functions/newsletter",
       options: Options(
         headers: {
           'X-Parse-Application-Id': GlobalConfiguration().appConfig['APP_ID'],
@@ -15,12 +15,12 @@ class ContactController extends GetxController {
         },
       ),
       data: {
-        'name': name,
-        'phoneNumber': phoneNumber,
-        'subject': subject,
-        'message': message,
+        'email': email,
+        'firstname': firstname,
+        'lastname': lastname,
+        'sms': phonenumber,
       },
     );
-    return response.data;
+    return response.data['result'];
   }
 }

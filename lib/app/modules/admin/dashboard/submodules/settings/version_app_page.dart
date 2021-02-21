@@ -132,8 +132,8 @@ class _VersionAppPageState extends State<VersionAppPage> {
                 ),
                 createNewItem || updateItem
                     ? createNewItem
-                        ? GenerateForm(data: newData)
-                        : GenerateForm(data: data)
+                        ? GenerateForm(fields: newData)
+                        : GenerateForm(fields: data)
                     : CustomFutureBuilder(
                         future: controller.listVersionApps(),
                         builder: (context, snapshot) {

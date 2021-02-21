@@ -1,8 +1,11 @@
+import 'dart:ui';
+
 import 'package:e_commerce/app/components/card/custom_card.dart';
 import 'package:e_commerce/app/components/future_builder/custom_future_builder.dart';
 import 'package:e_commerce/app/components/image_network/image_network_widget.dart';
 import 'package:e_commerce/app/modules/home/components/card_team.dart';
 import 'package:e_commerce/app/modules/home/components/copyrigth.dart';
+import 'package:e_commerce/app/modules/home/subroutes/initial/components/banner_widget.dart';
 import 'package:e_commerce/app/styles/font_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -45,58 +48,55 @@ class _InitialPageState extends State<InitialPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            width: MediaQuery.of(context).size.width * 0.65,
-            height: MediaQuery.of(context).size.height * 0.65,
-            margin: EdgeInsets.symmetric(vertical: 20),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(
-                  'https://cdn.shopify.com/s/files/1/0412/0133/6481/files/IMG_0229_900x900.jpg',
+          BannerWidget(),
+          BannerWidget(),
+          BannerWidget(),
+          BannerWidget(),
+          InkWell(
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.65,
+              height: MediaQuery.of(context).size.height * 0.65,
+              margin: EdgeInsets.symmetric(vertical: 20),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage('assets/images/image_2.jpeg'),
                 ),
               ),
             ),
+            onTap: () {
+              //
+            },
+            onHover: (hover) {
+              //
+            },
           ),
-          Container(
-            width: MediaQuery.of(context).size.width * 0.65,
-            height: MediaQuery.of(context).size.height * 0.65,
-            margin: EdgeInsets.symmetric(vertical: 20),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(
-                  'https://cdn.shopify.com/s/files/1/0412/0133/6481/files/HOMEPAGE_W20_900x900.jpg',
-                ),
-              ),
-            ),
-          ),
-          Container(
-            width: MediaQuery.of(context).size.width * 0.65,
-            height: MediaQuery.of(context).size.height * 0.65,
-            margin: EdgeInsets.symmetric(vertical: 20),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(
-                  'https://cdn.shopify.com/s/files/1/0412/0133/6481/files/IMG_0229_900x900.jpg',
-                ),
-              ),
-            ),
-          ),
-          Container(
-            width: MediaQuery.of(context).size.width * 0.65,
-            height: MediaQuery.of(context).size.height * 0.65,
-            margin: EdgeInsets.symmetric(vertical: 20),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(
-                  'https://cdn.shopify.com/s/files/1/0412/0133/6481/files/HOMEPAGE_W20_900x900.jpg',
-                ),
-              ),
-            ),
-          ),
+          // Container(
+          //   width: MediaQuery.of(context).size.width * 0.65,
+          //   height: MediaQuery.of(context).size.height * 0.65,
+          //   margin: EdgeInsets.symmetric(vertical: 20),
+          //   decoration: BoxDecoration(
+          //     image: DecorationImage(
+          //       fit: BoxFit.cover,
+          //       image: NetworkImage(
+          //         'https://cdn.shopify.com/s/files/1/0412/0133/6481/files/IMG_0229_900x900.jpg',
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          // Container(
+          //   width: MediaQuery.of(context).size.width * 0.65,
+          //   height: MediaQuery.of(context).size.height * 0.65,
+          //   margin: EdgeInsets.symmetric(vertical: 20),
+          //   decoration: BoxDecoration(
+          //     image: DecorationImage(
+          //       fit: BoxFit.cover,
+          //       image: NetworkImage(
+          //         'https://cdn.shopify.com/s/files/1/0412/0133/6481/files/HOMEPAGE_W20_900x900.jpg',
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

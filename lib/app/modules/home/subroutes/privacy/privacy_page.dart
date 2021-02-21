@@ -45,9 +45,9 @@ class _PrivacyPageState extends State<PrivacyPage> {
   Widget body() {
     return Container(
       padding: EdgeInsets.only(
-        left: MediaQuery.of(context).size.width / 5,
         top: 50,
         bottom: 100,
+        left: MediaQuery.of(context).size.width / 5,
         right: MediaQuery.of(context).size.width / 5,
       ),
       child: Text(

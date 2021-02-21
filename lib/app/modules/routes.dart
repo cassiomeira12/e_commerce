@@ -1,4 +1,6 @@
+import 'package:e_commerce/app/modules/home/subroutes/newsletter/newsletter_page.dart';
 import 'package:e_commerce/app/modules/home/subroutes/privacy/privacy_page.dart';
+import 'package:e_commerce/app/modules/home/subroutes/product/product_page.dart';
 import 'package:e_commerce/app/modules/home/subroutes/terms/terms_page.dart';
 import 'package:e_commerce/app/pages/recover_password/recover_password_page.dart';
 import 'package:e_commerce/app/pages/splash/splash_page.dart';
@@ -26,6 +28,12 @@ class Routes {
       name: '/home',
       page: () => HomePage(),
       binding: HomeBind(),
+      children: [
+        GetPage(
+          name: '/product',
+          page: () => ProductPage(),
+        ),
+      ],
     ),
     GetPage(
       name: '/politica-de-privacidade',
@@ -38,6 +46,10 @@ class Routes {
     GetPage(
       name: '/recover_password',
       page: () => RecoverPasswordPage(),
+    ),
+    GetPage(
+      name: '/newsletter',
+      page: () => NewsletterPage(),
     ),
     GetPage(
       name: '/admin',

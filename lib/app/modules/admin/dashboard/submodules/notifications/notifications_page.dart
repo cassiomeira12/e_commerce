@@ -107,7 +107,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
                   ),
                 ),
                 GenerateForm(
-                  data: form,
+                  fields: form,
                 ),
               ],
             ),

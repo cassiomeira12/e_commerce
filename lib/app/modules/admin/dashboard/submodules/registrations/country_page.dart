@@ -230,7 +230,7 @@ class _CountryPageState extends State<CountryPage> {
           ),
           creatingNew
               ? CircularProgressIndicator()
-              : GenerateForm(data: formData),
+              : GenerateForm(fields: formData),
         ],
       ),
     );

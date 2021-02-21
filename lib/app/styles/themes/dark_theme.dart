@@ -7,19 +7,25 @@ const primaryColorLight = Color(0xFFFF5D5D);
 const primaryColorDark = Color(0xFFB40000);
 const accentColor = Color(0xFFFCA639);
 
-const backgroundColor = Color(0xFFF5F5F5);
+const backgroundColor = Color(0xFF212121);
 const errorColor = Colors.redAccent;
 
 ThemeData darkTheme() {
   return ThemeData(
     visualDensity: VisualDensity.adaptivePlatformDensity,
-    scaffoldBackgroundColor: Colors.grey[800],
+    scaffoldBackgroundColor: backgroundColor,
     backgroundColor: Colors.grey[700],
     brightness: brightness,
     // tabBarTheme:
     // accentIconTheme:
     // accentTextTheme:
-    // appBarTheme:
+    appBarTheme: AppBarTheme(
+      color: Colors.transparent,
+      elevation: 0,
+      iconTheme: IconThemeData(
+        color: Colors.white,
+      ),
+    ),
     bottomAppBarTheme: BottomAppBarTheme(
       color: Colors.grey[700],
       elevation: 5,

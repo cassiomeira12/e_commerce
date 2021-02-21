@@ -32,7 +32,7 @@ class CopyRigth extends StatelessWidget {
                   "Newsletter",
                   style: fontSubtitle(context, size: 15, color: Colors.white),
                 ),
-                onPressed: () => Get.toNamed('/termos_de_uso'),
+                onPressed: () => Get.toNamed('/newsletter'),
               ),
               FlatButton(
                 child: Text(

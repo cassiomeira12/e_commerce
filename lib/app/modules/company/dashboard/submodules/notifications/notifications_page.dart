@@ -86,7 +86,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
           CardPage(
             child: Column(
               children: [
-                GenerateForm(data: form),
+                GenerateForm(fields: form),
               ],
             ),
           ),

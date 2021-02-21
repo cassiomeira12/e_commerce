@@ -236,7 +236,7 @@ class _StatePageState extends State<StatePage> {
           ),
           creatingNew
               ? CircularProgressIndicator()
-              : GenerateForm(data: formData),
+              : GenerateForm(fields: formData),
         ],
       ),
     );

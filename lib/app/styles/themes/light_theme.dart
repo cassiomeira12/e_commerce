@@ -13,14 +13,14 @@ const errorColor = Color(0xFFB00020);
 ThemeData lightTheme() {
   return ThemeData(
     visualDensity: VisualDensity.adaptivePlatformDensity,
-    //scaffoldBackgroundColor: Colors.white12, //backgroundColor,
+    scaffoldBackgroundColor: backgroundColor,
     backgroundColor: Colors.white,
     brightness: brightness,
     // tabBarTheme:
     // accentIconTheme:
     // accentTextTheme:
     appBarTheme: AppBarTheme(
-      color: Colors.white,
+      color: Colors.transparent,
       elevation: 0,
       iconTheme: IconThemeData(
         color: Colors.black,

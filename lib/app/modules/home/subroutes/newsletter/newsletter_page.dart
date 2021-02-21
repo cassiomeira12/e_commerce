@@ -1,27 +1,47 @@
 import 'package:e_commerce/app/components/generate_form/generate_form.dart';
 import 'package:e_commerce/app/modules/home/components/copyrigth.dart';
-import 'package:e_commerce/app/modules/home/subroutes/contact/contact_controller.dart';
+import 'package:e_commerce/app/modules/home/subroutes/newsletter/newsletter_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:get/get.dart';
 
-class ContactPage extends StatefulWidget {
+class NewsletterPage extends StatefulWidget {
   @override
-  _ContactPageState createState() => _ContactPageState();
+  _NewsletterPageState createState() => _NewsletterPageState();
 }
 
-class _ContactPageState extends State<ContactPage> {
-  var controller = ContactController();
-  bool loading = false;
+class _NewsletterPageState extends State<NewsletterPage> {
+  var controller = NewsletterController();
+
+  var loading = false;
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          body(),
-          CopyRigth(),
-        ],
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Container(
+          constraints: BoxConstraints(
+            minHeight: MediaQuery.of(context).size.height - 56,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: 200,
+                height: 200,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage('assets/images/logo_app.png'),
+                  ),
+                ),
+              ),
+              body(),
+              CopyRigth(),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -45,6 +65,12 @@ class _ContactPageState extends State<ContactPage> {
                       "type": "textField",
                     },
                     {
+                      "field": "email",
+                      "title": "E-mail",
+                      "type": "textField",
+                      "textInputType": TextInputType.emailAddress,
+                    },
+                    {
                       "field": "phoneNumber",
                       "title": "Telefone",
                       "type": "textField",
@@ -59,14 +85,10 @@ class _ContactPageState extends State<ContactPage> {
                       },
                     },
                     {
-                      "field": "subject",
-                      "title": "Assunto",
+                      "field": "instagram",
+                      "title": "Instagram",
                       "type": "textField",
-                    },
-                    {
-                      "field": "message",
-                      "type": "textArea",
-                      "title": "Mensagem",
+                      "textCapitalization": TextCapitalization.none,
                     },
                     {
                       "type": "button",
@@ -86,16 +108,16 @@ class _ContactPageState extends State<ContactPage> {
   sendNewContact(data) async {
     setState(() => loading = true);
     try {
-      await controller.sendContact(
-        name: data['name'],
-        phoneNumber:
+      await controller.sendNewsletter(
+        firstname: data['name'],
+        lastname: data['instagram'],
+        email: data['email'],
+        phonenumber:
             data['phoneNumber'].toString().replaceAll(' ', '').substring(1),
-        subject: data['subject'],
-        message: data['message'],
       );
       Get.showSnackbar(GetBar(
         messageText: Text(
-          'Contato enviado com sucesso!',
+          'Cadastro feito com sucesso!',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.white,

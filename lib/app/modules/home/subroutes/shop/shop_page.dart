@@ -1,4 +1,5 @@
 import 'package:e_commerce/app/modules/home/components/copyrigth.dart';
+import 'package:e_commerce/app/modules/home/subroutes/shop/components/product_widget.dart';
 import 'package:e_commerce/app/styles/font_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -101,17 +102,7 @@ class _ShopPageState extends State<ShopPage> {
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               itemBuilder: (_, index) {
-                return Container(
-                  margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(
-                        'https://cdn.shopify.com/s/files/1/0412/0133/6481/products/SHERPAJACKET-GREEN_600x600.jpg',
-                      ),
-                    ),
-                  ),
-                );
+                return ProductWidget();
               },
             ),
           ),

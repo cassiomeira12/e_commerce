@@ -235,7 +235,7 @@ class _CityPageState extends State<CityPage> {
           ),
           creatingNew
               ? CircularProgressIndicator()
-              : GenerateForm(data: formData),
+              : GenerateForm(fields: formData),
         ],
       ),
     );

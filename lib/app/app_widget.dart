@@ -49,7 +49,7 @@ class _AppWidgetState extends State<AppWidget> {
           ResponsiveBreakpoint.autoScale(800, name: TABLET),
           ResponsiveBreakpoint.resize(1000, name: DESKTOP),
         ],
-        background: Container(color: Colors.white),
+        //background: Container(color: Colors.white),
       ),
     );
   }

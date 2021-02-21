@@ -101,7 +101,6 @@ class _HomePageState extends State<HomePage> {
           MediaQuery.of(context).size.width > 600 ? 100 : kToolbarHeight,
         ),
         child: Container(
-          color: Colors.white,
           padding: MediaQuery.of(context).size.width > 600
               ? EdgeInsets.only(top: 15)
               : EdgeInsets.zero,
@@ -112,9 +111,23 @@ class _HomePageState extends State<HomePage> {
                     ? null
                     : Container(),
                 title: InkWell(
-                  child: Image.asset(
-                    "assets/images/logo_app_title.png",
-                    width: MediaQuery.of(context).size.width / 3,
+                  // child: Image.asset(
+                  //   "assets/images/logo_only.png",
+                  //   height: kToolbarHeight,
+                  //   //width: MediaQuery.of(context).size.width / 3,
+                  // ),
+                  child: Text(
+                    'Bite The Bullet',
+                    style: fontTitle(
+                      context,
+                      size: MediaQuery.of(context).size.width > 1000
+                          ? 35
+                          : MediaQuery.of(context).size.width > 700
+                              ? 30
+                              : MediaQuery.of(context).size.width > 600
+                                  ? 30
+                                  : 25,
+                    ),
                   ),
                   onTap: () {
                     setState(() {
@@ -134,6 +147,27 @@ class _HomePageState extends State<HomePage> {
                       //
                     },
                   ),
+                  // Visibility(
+                  //   visible: MediaQuery.of(context).size.width > 600,
+                  //   child: IconButton(
+                  //     icon: ImageIcon(
+                  //       AssetImage('assets/images/ligh_mode.jpeg'),
+                  //     ),
+                  //     padding: EdgeInsets.symmetric(horizontal: 20),
+                  //     tooltip: 'Tema',
+                  //     onPressed: () async {
+                  //       var pref = await SharedPreferences.getInstance();
+                  //       int index = pref.getInt('theme');
+                  //       index = index == null
+                  //           ? 1
+                  //           : index == 1
+                  //               ? 2
+                  //               : 1;
+                  //       pref.setInt("theme", index);
+                  //       Get.changeThemeMode(ThemeMode.values[index]);
+                  //     },
+                  //   ),
+                  // ),
                   IconButton(
                     icon: Icon(Icons.account_circle),
                     padding: EdgeInsets.symmetric(horizontal: 20),
@@ -145,14 +179,14 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               Visibility(
-                visible: MediaQuery.of(context).size.width > 600,
+                visible: MediaQuery.of(context).size.width > 610,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: menuItems.asMap().entries.map((e) {
                     return FlatButton(
                       child: Text(
                         e.value['value'].toUpperCase(),
-                        style: fontSubtitle(context, size: 20, bold: true),
+                        style: fontSubtitle(context, size: 18, bold: true),
                       ),
                       onPressed: () {
                         if (e.value['action'] == null) {
