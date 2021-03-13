@@ -4,17 +4,19 @@ import 'package:e_commerce/app/modules/home/subroutes/product/product_page.dart'
 import 'package:e_commerce/app/modules/home/subroutes/terms/terms_page.dart';
 import 'package:e_commerce/app/pages/recover_password/recover_password_page.dart';
 import 'package:e_commerce/app/pages/splash/splash_page.dart';
+import 'package:e_commerce/app/utils/middlewares/admin_middleware.dart';
+import 'package:e_commerce/app/utils/middlewares/auth_middleware.dart';
 import 'package:get/get.dart';
 
 import 'admin/admin_page.dart';
 import 'admin/dashboard/dashboard_bind.dart' as AdminDashboard;
 import 'admin/dashboard/dashboard_page.dart' as AdminDashboard;
 import 'admin/login/login_page.dart' as AdminLogin;
-import 'company/company_page.dart';
-import 'company/dashboard/dashboard_bind.dart' as CompanyBind;
-import 'company/dashboard/dashboard_page.dart' as CompanyDashboard;
-import 'company/dashboard/submodules/orders/order_details_page.dart';
-import 'company/login/login_page.dart' as CompanyLogin;
+import 'client/client_bind.dart';
+import 'client/client_page.dart';
+import 'client/dashboard/dashboard_bind.dart' as ClientDashboard;
+import 'client/dashboard/dashboard_page.dart' as ClientDashboard;
+import 'client/login/login_page.dart' as ClientLogin;
 import 'home/home_bind.dart';
 import 'home/home_page.dart';
 
@@ -63,31 +65,48 @@ class Routes {
           name: '/dashboard',
           page: () => AdminDashboard.DashboardPage(),
           binding: AdminDashboard.DashboardBind(),
-          //middlewares: [AdminMiddleware(0, redirectPath: '/admin')],
+          middlewares: [AdminMiddleware(0, redirectPath: '/admin')],
         ),
       ],
     ),
     GetPage(
-      name: '/company',
-      page: () => CompanyPage(),
+      name: '/client',
+      page: () => ClientPage(),
+      binding: ClientBind(),
       children: [
         GetPage(
           name: '/login',
-          page: () => CompanyLogin.LoginPage(),
+          page: () => ClientLogin.LoginPage(),
         ),
         GetPage(
           name: '/dashboard',
-          page: () => CompanyDashboard.DashboardPage(),
-          binding: CompanyBind.DashboardBind(),
-          //middlewares: [CompanyMiddleware(0, redirectPath: '/company')],
-          children: [
-            GetPage(
-              name: '/order_details',
-              page: () => OrderDetailsPage(),
-            ),
-          ],
+          page: () => ClientDashboard.DashboardPage(),
+          binding: ClientDashboard.DashboardBind(),
+          middlewares: [AuthMiddleware(0, redirectPath: '/client')],
         ),
       ],
     ),
+    // GetPage(
+    //   name: '/company',
+    //   page: () => CompanyPage(),
+    //   children: [
+    //     GetPage(
+    //       name: '/login',
+    //       page: () => CompanyLogin.LoginPage(),
+    //     ),
+    //     GetPage(
+    //       name: '/dashboard',
+    //       page: () => CompanyDashboard.DashboardPage(),
+    //       binding: CompanyBind.DashboardBind(),
+    //       //middlewares: [CompanyMiddleware(0, redirectPath: '/company')],
+    //       children: [
+    //         GetPage(
+    //           name: '/order_details',
+    //           page: () => OrderDetailsPage(),
+    //         ),
+    //       ],
+    //     ),
+    //   ],
+    // ),
   ];
 }
