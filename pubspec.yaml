@@ -16,11 +16,12 @@ dependencies:
 
   responsive_framework: ^0.0.14
 
-  get: ^3.22.2
+  get: 3.26.0
   parse_server_sdk_flutter: ^2.0.1
-  firebase_auth: ^0.18.4+1
-  firebase_messaging: ^7.0.3
-  google_sign_in: ^4.5.9
+
+  firebase_auth: 0.18.4+1
+  firebase_messaging: 7.0.3
+  google_sign_in: 4.5.9
   # flutter_local_notifications: ^3.0.2
   dio: ^3.0.10
   # path_provider: ^1.6.14
