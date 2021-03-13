@@ -1,4 +1,5 @@
 import 'package:e_commerce/app/components/drawer/drawer_widget.dart';
+import 'package:e_commerce/app/components/image_network/image_network_widget.dart';
 import 'package:e_commerce/app/components/responsive/responsive.dart';
 import 'package:e_commerce/app/modules/home/home_controller.dart';
 import 'package:e_commerce/app/modules/home/subroutes/about/about_page.dart';
@@ -7,6 +8,7 @@ import 'package:e_commerce/app/modules/home/subroutes/initial/initial_page.dart'
 import 'package:e_commerce/app/modules/home/subroutes/lookbook/lookbook_page.dart';
 import 'package:e_commerce/app/modules/home/subroutes/lore/lore_page.dart';
 import 'package:e_commerce/app/modules/home/subroutes/shop/shop_page.dart';
+import 'package:e_commerce/app/shared/repositories/auth_service.dart';
 import 'package:e_commerce/app/styles/font_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,13 +22,16 @@ class _HomePageState extends State<HomePage> {
   int selectedPage = 0, categoryIndex = 0, menuIndex = 0;
 
   List<dynamic> menuItems;
-  List<dynamic> pages = List();
+  List<dynamic> pages = [];
+
+  var auth = Get.find<AuthService>();
 
   final controller = Get.put(HomeController());
 
   @override
   void initState() {
     super.initState();
+    auth.currentUser();
     menuItems = [
       {
         'value': 'Home',
@@ -101,9 +106,6 @@ class _HomePageState extends State<HomePage> {
           MediaQuery.of(context).size.width > 600 ? 100 : kToolbarHeight,
         ),
         child: Container(
-          padding: MediaQuery.of(context).size.width > 600
-              ? EdgeInsets.only(top: 15)
-              : EdgeInsets.zero,
           child: Column(
             children: [
               AppBar(
@@ -169,11 +171,25 @@ class _HomePageState extends State<HomePage> {
                   //   ),
                   // ),
                   IconButton(
-                    icon: Icon(Icons.account_circle),
+                    icon: FutureBuilder(
+                      future: auth.currentUser(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return auth.getUser()?.avatarURL == null
+                              ? Icon(Icons.account_circle)
+                              : ImageNetworkWidget(
+                                  url: auth.getUser().avatarURL,
+                                  size: 30,
+                                );
+                        } else {
+                          return Icon(Icons.account_circle);
+                        }
+                      },
+                    ),
                     padding: EdgeInsets.symmetric(horizontal: 20),
-                    tooltip: 'Entrar',
+                    //tooltip: 'Entrar',
                     onPressed: () {
-                      //
+                      Get.toNamed('/client');
                     },
                   ),
                 ],

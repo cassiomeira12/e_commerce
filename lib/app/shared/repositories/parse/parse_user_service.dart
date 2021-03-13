@@ -1,3 +1,5 @@
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+
 import 'base_parse_service.dart';
 
 class ParseUserService {
@@ -12,7 +14,11 @@ class ParseUserService {
   }
 
   update(item) async {
-    return service.update(item);
+    return service.update(item).then((value) async {
+      var parseUser = await ParseUser.currentUser();
+      await parseUser.getUpdatedUser();
+      return value;
+    });
   }
 
   delete(item) async {

@@ -4,6 +4,9 @@ import 'package:get/get.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 import 'modules/routes.dart';
+import 'shared/notifications/push_notification.dart';
+import 'shared/repositories/auth_service.dart';
+import 'shared/repositories/parse/parse_init.dart';
 import 'styles/themes/dark_theme.dart';
 import 'styles/themes/light_theme.dart';
 import 'styles/themes/theme.dart';
@@ -18,6 +21,10 @@ class _AppWidgetState extends State<AppWidget> {
   @override
   void initState() {
     super.initState();
+    Get.putAsync(() => ParseInit.init(), permanent: true).then((value) {
+      Get.put(AuthService(), permanent: true);
+      Get.put(PushNotification(), permanent: true);
+    });
     getTheme().then((value) {
       Get.changeThemeMode(value);
     });
@@ -41,7 +48,6 @@ class _AppWidgetState extends State<AppWidget> {
           popGesture: Get.isPopGestureEnable,
           debugShowCheckedModeBanner: false,
         ),
-        //maxWidth: 1200,
         minWidth: 480,
         defaultScale: false,
         breakpoints: [
@@ -49,7 +55,6 @@ class _AppWidgetState extends State<AppWidget> {
           ResponsiveBreakpoint.autoScale(800, name: TABLET),
           ResponsiveBreakpoint.resize(1000, name: DESKTOP),
         ],
-        //background: Container(color: Colors.white),
       ),
     );
   }

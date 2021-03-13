@@ -21,10 +21,7 @@ class ParseLoginService {
   signInWithGoogle() async {
     String clientIDGoogle =
         "604408739135-8f0o4br2ebvs1uju3h7oq02ofnmbh1c3.apps.googleusercontent.com";
-    GoogleSignIn googleSignIn = GoogleSignIn(
-      clientId: clientIDGoogle,
-      //scopes: ['email', 'https://www.googleapis.com/auth/contacts.readonly'],
-    );
+    GoogleSignIn googleSignIn = GoogleSignIn(clientId: clientIDGoogle);
     GoogleSignInAccount googleSignInAccount;
     GoogleSignInAuthentication authentication;
     AuthCredential credential;
@@ -38,8 +35,6 @@ class ParseLoginService {
     } catch (error) {
       print(error);
       throw error;
-    } finally {
-      googleSignIn.signOut();
     }
 
     String token = authentication.idToken;
@@ -54,11 +49,14 @@ class ParseLoginService {
 
     return ParseUser.loginWith('google', authData).then((value) async {
       if (value.success && value.statusCode == 201) {
-        var user = value.result as ParseUser;
-        user.username = email;
-        user.set('name', name);
-        user.set('avatarURL', avatarURL);
-        return user.update().then((value) => value.result.toJson());
+        return ParseUser.loginWith('google', authData).then((value) {
+          var user = value.result as ParseUser;
+          user.username = email;
+          user.set('name', name);
+          user.set('email', email);
+          user.set('avatarURL', avatarURL);
+          return user.update().then((value) => value.result.toJson());
+        });
       }
       return value.result.toJson();
     }).whenComplete(() => googleSignIn.signOut());

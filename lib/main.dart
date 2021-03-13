@@ -6,6 +6,8 @@ import 'app/app_widget.dart';
 import 'environment_config.dart';
 
 void main() async {
-  GlobalConfiguration().loadFromMap(kReleaseMode ? RELEASE : DEBUG);
+  kReleaseMode
+      ? GlobalConfiguration().loadFromMap(RELEASE)
+      : GlobalConfiguration().loadFromMap(kReleaseMode ? RELEASE : DEBUG);
   runApp(AppWidget());
 }
