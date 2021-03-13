@@ -1,9 +1,9 @@
+import 'package:e_commerce/app/components/custom_snackbar/custom_snackbar.dart';
 import 'package:e_commerce/app/components/generate_form/generate_form.dart';
 import 'package:e_commerce/app/modules/home/components/copyrigth.dart';
 import 'package:e_commerce/app/modules/home/subroutes/newsletter/newsletter_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
-import 'package:get/get.dart';
 
 class NewsletterPage extends StatefulWidget {
   @override
@@ -21,7 +21,7 @@ class _NewsletterPageState extends State<NewsletterPage> {
       body: SingleChildScrollView(
         child: Container(
           constraints: BoxConstraints(
-            minHeight: MediaQuery.of(context).size.height - 56,
+            minHeight: MediaQuery.of(context).size.height,
           ),
           child: Column(
             mainAxisSize: MainAxisSize.max,
@@ -55,7 +55,10 @@ class _NewsletterPageState extends State<NewsletterPage> {
         padding: EdgeInsets.symmetric(horizontal: 20),
         margin: EdgeInsets.only(bottom: 20),
         child: loading
-            ? Center(child: CircularProgressIndicator())
+            ? Container(
+                height: MediaQuery.of(context).size.height - 180,
+                child: Center(child: CircularProgressIndicator()),
+              )
             : GenerateForm(
                 fields: {
                   "fields": [
@@ -115,23 +118,17 @@ class _NewsletterPageState extends State<NewsletterPage> {
         phonenumber:
             data['phoneNumber'].toString().replaceAll(' ', '').substring(1),
       );
-      Get.showSnackbar(GetBar(
-        messageText: Text(
-          'Cadastro feito com sucesso!',
-          style: TextStyle(color: Colors.white),
-        ),
-        backgroundColor: Colors.white,
-        duration: Duration(seconds: 3),
-      ));
+      CustomSnackbar.show(
+        context,
+        message: 'Cadastro feito com sucesso!',
+        seconds: 4,
+      );
     } catch (error) {
-      Get.showSnackbar(GetBar(
-        messageText: Text(
-          'Ops! algo deu errado',
-          style: TextStyle(color: Colors.white),
-        ),
-        backgroundColor: Colors.redAccent,
-        duration: Duration(seconds: 3),
-      ));
+      CustomSnackbar.showError(
+        context,
+        message: 'Ops! algo deu errado',
+        seconds: 4,
+      );
     } finally {
       setState(() => loading = false);
     }
