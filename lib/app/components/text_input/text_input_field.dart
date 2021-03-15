@@ -23,7 +23,7 @@ class TextInputField extends StatefulWidget {
     this.fieldStyle,
     this.hintText,
     this.keyboardType = TextInputType.text,
-    this.textAlign = TextAlign.center,
+    this.textAlign = TextAlign.left,
     this.obscureText = false,
     this.textCapitalization = TextCapitalization.none,
     this.enable = true,

@@ -42,7 +42,7 @@ class Routes {
       page: () => PrivacyPage(),
     ),
     GetPage(
-      name: '/termos_de_uso',
+      name: '/termos-de-uso',
       page: () => TermsPage(),
     ),
     GetPage(

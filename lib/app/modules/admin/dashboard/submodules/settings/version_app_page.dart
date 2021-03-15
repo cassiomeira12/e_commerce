@@ -1,9 +1,9 @@
 import 'package:e_commerce/app/components/buttons/primary_button.dart';
+import 'package:e_commerce/app/components/card/card_page.dart';
 import 'package:e_commerce/app/components/future_builder/custom_future_builder.dart';
 import 'package:e_commerce/app/components/generate_form/generate_form.dart';
 import 'package:e_commerce/app/modules/admin/dashboard/components/version_app/version_app_widget.dart';
 import 'package:e_commerce/app/modules/admin/dashboard/dashboard_controller.dart';
-import 'package:e_commerce/app/modules/company/dashboard/components/card_page/card_page.dart';
 import 'package:e_commerce/app/styles/font_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

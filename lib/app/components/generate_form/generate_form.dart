@@ -173,9 +173,8 @@ class _GenerateFormState extends State<GenerateForm> {
 
   Widget checkbox(data) {
     if (!booleans.containsKey(data['field'])) {
-      booleans[data['field']] =
-          data['initial'] != null ? data['initial'] : false;
-      data['result'] = data['initial'].toString();
+      booleans[data['field']] = data['initial'] ?? false;
+      data['result'] = '${data['initial'] ?? false}';
     }
     return Padding(
       padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
@@ -373,9 +372,7 @@ class _GenerateFormState extends State<GenerateForm> {
   }
 
   convertToInitialType(initial, value) {
-    if (initial == null) {
-      return value;
-    }
+    if (initial == null) return value;
     //print("[$initial] -> [${initial.runtimeType}]");
     switch (initial.runtimeType) {
       case int:

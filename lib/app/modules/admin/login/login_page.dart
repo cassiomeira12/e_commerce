@@ -1,11 +1,6 @@
-import 'package:e_commerce/app/components/buttons/light_button.dart';
-import 'package:e_commerce/app/components/buttons/primary_button.dart';
-import 'package:e_commerce/app/components/buttons/secondary_button.dart';
 import 'package:e_commerce/app/components/shapes/background_card.dart';
 import 'package:e_commerce/app/components/shapes/shape_round.dart';
-import 'package:e_commerce/app/components/text_input/text_input_field.dart';
 import 'package:e_commerce/app/shared/repositories/admin_service.dart';
-import 'package:e_commerce/app/styles/font_style.dart';
 import 'package:e_commerce/app/utils/strings/errors.dart';
 import 'package:e_commerce/app/utils/strings/strings.dart';
 import 'package:flutter/material.dart';
@@ -89,8 +84,6 @@ class _LoginPageState extends State<LoginPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           ShapeRound(child: _showForm()),
-          othersSignIns(),
-          SizedBox(height: 100),
         ],
       ),
     );
@@ -106,40 +99,11 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             showLogo(),
-            Padding(
-              padding: EdgeInsets.fromLTRB(0, 16, 0, 0),
-              child: TextInputField(
-                labelText: EMAIL,
-                keyboardType: TextInputType.emailAddress,
-                onSaved: (value) => _email = value.trim(),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(0, 16, 0, 0),
-              child: TextInputField(
-                labelText: PASSWORD,
-                keyboardType: TextInputType.text,
-                obscureText: true,
-                onSaved: (value) => _password = value.trim(),
-              ),
-            ),
-            showForgotPasswordButton(),
-            loginButton(),
+            googleButton(),
+            SizedBox(height: 10),
           ],
         ),
       ),
-    );
-  }
-
-  Widget othersSignIns() {
-    return Column(
-      children: [
-        Text("--- OU ---", style: fontMessage(context)),
-        googleButton(),
-        signupButton(),
-        anonymousButton(),
-        newCompanyButton(),
-      ],
     );
   }
 
@@ -158,41 +122,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
         SizedBox(height: 10),
-        Text("$APP_NAME Admin", style: fontTitle(context)),
       ],
-    );
-  }
-
-  Widget showForgotPasswordButton() {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8),
-      child: LightButton(
-        alignment: Alignment.bottomRight,
-        text: RECOVER_PASSWORD,
-        onPressed: () => Get.toNamed('/recover_password'),
-      ),
-    );
-  }
-
-  Widget loginButton() {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
-      child: PrimaryButton(
-        text: LOGIN,
-        onPressed: () async {
-          if (validateAndSave()) {
-            try {
-              setState(() => _loading = true);
-              await controller.signIn(_email, _password);
-              Get.offNamed('/admin/dashboard');
-            } catch (error) {
-              catchError(title: 'Erro ao fazer login', error: error);
-            } finally {
-              setState(() => _loading = false);
-            }
-          }
-        },
-      ),
     );
   }
 
@@ -215,58 +145,5 @@ class _LoginPageState extends State<LoginPage> {
         },
       ),
     );
-  }
-
-  Widget anonymousButton() {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(10, 12, 10, 0),
-      child: LightButton(
-        text: "Entrar como convidado".toUpperCase(),
-        onPressed: () async {
-          try {
-            setState(() => _loading = true);
-            await controller.signAnonymous();
-            Get.offNamed('/admin/dashboard');
-          } catch (error) {
-            catchError(title: 'Erro ao fazer login', error: error);
-          } finally {
-            setState(() => _loading = false);
-          }
-        },
-      ),
-    );
-  }
-
-  Widget signupButton() {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(60, 12, 60, 10),
-      child: SecondaryButton(
-        text: CREATE_ACCOUNT,
-        onPressed: () {
-          //
-        },
-      ),
-    );
-  }
-
-  Widget newCompanyButton() {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(10, 10, 10, 50),
-      child: LightButton(
-        text: "Cadastre seu estabelecimento".toUpperCase(),
-        onPressed: () {
-          //
-        },
-      ),
-    );
-  }
-
-  bool validateAndSave() {
-    final form = _formKey.currentState;
-    if (form.validate()) {
-      form.save();
-      return true;
-    }
-    return false;
   }
 }

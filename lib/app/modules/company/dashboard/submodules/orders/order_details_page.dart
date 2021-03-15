@@ -684,37 +684,37 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                           style: fontMessage(context, size: 20, bold: true),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 5, right: 10),
-                        child: Text(
-                          "${address.street}" +
-                              (address.number == null
-                                  ? ""
-                                  : ", ${address.number}"),
-                          textAlign: TextAlign.left,
-                          style: fontMessage(context, size: 20),
-                        ),
-                      ),
-                      address.neighborhood != null
-                          ? Padding(
-                              padding: EdgeInsets.only(top: 5, right: 10),
-                              child: Text(
-                                address.neighborhood,
-                                textAlign: TextAlign.left,
-                                style: fontMessage(context, size: 20),
-                              ),
-                            )
-                          : Container(),
-                      address.reference != null
-                          ? Padding(
-                              padding: EdgeInsets.only(top: 5, right: 10),
-                              child: Text(
-                                address.reference,
-                                textAlign: TextAlign.left,
-                                style: fontMessage(context, size: 20),
-                              ),
-                            )
-                          : Container(),
+                      // Padding(
+                      //   padding: EdgeInsets.only(top: 5, right: 10),
+                      //   child: Text(
+                      //     "${address.street}" +
+                      //         (address.number == null
+                      //             ? ""
+                      //             : ", ${address.number}"),
+                      //     textAlign: TextAlign.left,
+                      //     style: fontMessage(context, size: 20),
+                      //   ),
+                      // ),
+                      // address.neighborhood != null
+                      //     ? Padding(
+                      //         padding: EdgeInsets.only(top: 5, right: 10),
+                      //         child: Text(
+                      //           address.neighborhood,
+                      //           textAlign: TextAlign.left,
+                      //           style: fontMessage(context, size: 20),
+                      //         ),
+                      //       )
+                      //     : Container(),
+                      // address.reference != null
+                      //     ? Padding(
+                      //         padding: EdgeInsets.only(top: 5, right: 10),
+                      //         child: Text(
+                      //           address.reference,
+                      //           textAlign: TextAlign.left,
+                      //           style: fontMessage(context, size: 20),
+                      //         ),
+                      //       )
+                      //     : Container(),
                       order.note != null && order.note.isNotEmpty
                           ? Padding(
                               padding: EdgeInsets.only(top: 5, right: 10),
@@ -747,9 +747,10 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                   ),
                 ),
                 child: Text(
-                  order.deliveryAddress.location == null
-                      ? NO_LOCATION
-                      : OPEN_MAP,
+                  // order.deliveryAddress.location == null
+                  //     ? NO_LOCATION
+                  //     : OPEN_MAP,
+                  "",
                   style: fontMessage(
                     context,
                     size: 20,

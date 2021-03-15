@@ -1,18 +1,16 @@
-import '../models/status.dart';
 import 'base_model.dart';
-import 'phone_number.dart';
 
 class User extends BaseModel<User> {
   NotificationToken notificationToken;
   String avatarURL;
-  Status status;
+  //Status status;
   String username;
   String name;
   String email;
   bool emailVerified;
   String password;
-  PhoneNumber phoneNumber;
-  bool socialProvider;
+  String phoneNumber;
+  //bool socialProvider;
 
   User({String id}) : super('_User') {
     this.id = id;
@@ -31,33 +29,24 @@ class User extends BaseModel<User> {
     emailVerified =
         map["emailVerified"] == null ? false : map["emailVerified"] as bool;
     password = map["password"];
-    createdAt = map["createdAt"] == null
-        ? null
-        : DateTime.parse(map["createdAt"]).toLocal();
-    updatedAt = map["updatedAt"] == null
-        ? null
-        : DateTime.parse(map["updatedAt"]).toLocal();
-    phoneNumber = map["phoneNumber"] == null
-        ? null
-        : PhoneNumber.fromMap(map["phoneNumber"]);
-    socialProvider =
-        map["socialProvider"] == null ? false : map["socialProvider"] as bool;
+    phoneNumber = map["phoneNumber"];
+    // socialProvider =
+    //     map["socialProvider"] == null ? false : map["socialProvider"] as bool;
   }
 
   toMap() {
     var map = super.toMap();
-    map["notificationToken"] =
-        notificationToken == null ? null : notificationToken.toMap();
+    map["notificationToken"] = notificationToken?.toMap();
     map["avatarURL"] = avatarURL;
     map["username"] = username;
     map["name"] = name;
     //map["email"] = email;
     //map["emailVerified"] = emailVerified;
     map["password"] = password;
-    map["createdAt"] = createdAt == null ? null : createdAt.toString();
-    map["updatedAt"] = updatedAt == null ? null : updatedAt.toString();
-    map["phoneNumber"] = phoneNumber == null ? null : phoneNumber.toMap();
-    map["socialProvider"] = socialProvider;
+    map["createdAt"] = createdAt?.toString();
+    map["updatedAt"] = updatedAt?.toString();
+    map["phoneNumber"] = phoneNumber;
+    //map["socialProvider"] = socialProvider;
     return map;
   }
 
@@ -69,7 +58,7 @@ class User extends BaseModel<User> {
 
     notificationToken = item.notificationToken;
     avatarURL = item.avatarURL;
-    status = item.status;
+    //status = item.status;
     username = item.username;
     name = item.name;
     email = item.email;
@@ -78,7 +67,7 @@ class User extends BaseModel<User> {
     createdAt = item.createdAt;
     updatedAt = item.updatedAt;
     phoneNumber = item.phoneNumber;
-    socialProvider = item.socialProvider;
+    //socialProvider = item.socialProvider;
   }
 
   bool isAnonymous() {
@@ -103,14 +92,14 @@ class NotificationToken extends BaseModel<NotificationToken> {
     baseFromMap(map);
     token = map["token"];
     active = map["active"] as bool;
-    topics = map["topics"] == null ? List() : List.from(map["topics"]);
+    topics = map["topics"] == null ? [] : List.from(map["topics"]);
   }
 
   toMap() {
     var map = super.toMap();
     map["token"] = token;
     map["active"] = active;
-    map["topics"] = topics == null ? List() : topics;
+    map["topics"] = topics == null ? [] : topics;
     return map;
   }
 

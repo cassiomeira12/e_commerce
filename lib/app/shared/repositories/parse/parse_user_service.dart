@@ -13,7 +13,7 @@ class ParseUserService {
     return service.read(item);
   }
 
-  update(item) async {
+  Future update(item) async {
     return service.update(item).then((value) async {
       var parseUser = await ParseUser.currentUser();
       await parseUser.getUpdatedUser();

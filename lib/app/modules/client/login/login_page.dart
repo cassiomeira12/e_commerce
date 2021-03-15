@@ -126,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
           try {
             setState(() => _loading = true);
             await controller.signInWithGoogle();
-            Get.offNamed('/client');
+            Get.offNamed('/home');
           } catch (error) {
             catchError(title: 'Erro ao fazer login', error: error);
           } finally {

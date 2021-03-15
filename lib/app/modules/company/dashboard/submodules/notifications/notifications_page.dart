@@ -1,5 +1,5 @@
+import 'package:e_commerce/app/components/card/card_page.dart';
 import 'package:e_commerce/app/components/generate_form/generate_form.dart';
-import 'package:e_commerce/app/modules/company/dashboard/components/card_page/card_page.dart';
 import 'package:e_commerce/app/modules/company/dashboard/submodules/notifications/notifications_controller.dart';
 import 'package:e_commerce/app/shared/models/company/company.dart';
 import 'package:e_commerce/app/shared/repositories/admin_company_service.dart';

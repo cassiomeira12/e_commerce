@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:global_configuration/global_configuration.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
@@ -19,9 +20,9 @@ class ParseLoginService {
 
   @override
   signInWithGoogle() async {
-    String clientIDGoogle =
-        "604408739135-8f0o4br2ebvs1uju3h7oq02ofnmbh1c3.apps.googleusercontent.com";
-    GoogleSignIn googleSignIn = GoogleSignIn(clientId: clientIDGoogle);
+    GoogleSignIn googleSignIn = GoogleSignIn(
+      clientId: GlobalConfiguration().appConfig['CLIENT_ID_GOOGLE'],
+    );
     GoogleSignInAccount googleSignInAccount;
     GoogleSignInAuthentication authentication;
     AuthCredential credential;

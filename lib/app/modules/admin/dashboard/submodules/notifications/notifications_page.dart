@@ -1,5 +1,5 @@
+import 'package:e_commerce/app/components/card/card_page.dart';
 import 'package:e_commerce/app/components/generate_form/generate_form.dart';
-import 'package:e_commerce/app/modules/company/dashboard/components/card_page/card_page.dart';
 import 'package:e_commerce/app/styles/font_style.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
