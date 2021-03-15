@@ -222,14 +222,17 @@ class _DashboardPageState extends State<DashboardPage> {
                           : List.from(drawerItems[categoryIndex]['menus'])[
                               menuIndex - 1]['value'],
                   overflow: TextOverflow.fade,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 actions: [
                   MaterialButton(
                     child: Text(
                       CLOSE,
                       style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.white,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

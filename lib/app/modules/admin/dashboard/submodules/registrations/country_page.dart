@@ -1,7 +1,7 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:e_commerce/app/components/buttons/light_button.dart';
+import 'package:e_commerce/app/components/card/card_page.dart';
 import 'package:e_commerce/app/components/generate_form/generate_form.dart';
-import 'package:e_commerce/app/modules/admin/dashboard/components/card_page/card_page.dart';
 import 'package:e_commerce/app/shared/repositories/parse/parse_country_service.dart';
 import 'package:e_commerce/app/styles/font_style.dart';
 import 'package:e_commerce/app/utils/strings/strings.dart';

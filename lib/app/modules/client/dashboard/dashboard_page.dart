@@ -1,8 +1,6 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:e_commerce/app/components/drawer/drawer_widget.dart';
 import 'package:e_commerce/app/components/responsive/responsive.dart';
-import 'package:e_commerce/app/modules/admin/dashboard/submodules/companies/companies_page.dart';
-import 'package:e_commerce/app/modules/admin/dashboard/submodules/companies/new_company_page.dart';
 import 'package:e_commerce/app/shared/repositories/auth_service.dart';
 import 'package:e_commerce/app/utils/strings/strings.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +8,9 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'dashboard_controller.dart';
+import 'submodules/account/account_page.dart';
+import 'submodules/address/address_page.dart';
+import 'submodules/history/history_page.dart';
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -29,99 +30,28 @@ class _DashboardPageState extends State<DashboardPage> {
   void initState() {
     super.initState();
     drawerItems = [
-      // {
-      //   'value': 'Dashboard',
-      //   'icon': Icons.dashboard,
-      //   'page': DashboardPage(),
-      // },
       {
-        'value': 'Estabelecimentos',
-        'icon': Icons.home_work_rounded,
-        'page': CompaniesPage(),
+        'value': 'Minha conta',
+        'icon': Icons.account_circle,
+        'page': AccountPage(),
         'menus': [
           {
-            'value': 'Cadastrar Estabelecimento',
-            'page': NewCompanyPage(),
-          }
+            'value': 'Endereços',
+            'page': AddressPage(),
+          },
         ],
       },
-      // {
-      //   'value': 'Relatórios',
-      //   'icon': Icons.insert_chart_outlined_sharp,
-      //   'page': ReportPage(),
-      //   'menus': [
-      //     {
-      //       'value': 'Relatório semanal',
-      //       'page': ReportPage(),
-      //     },
-      //     {
-      //       'value': 'Relatório mensal',
-      //       'page': ReportPage(),
-      //     },
-      //   ],
-      // },
-      // {
-      //   'value': 'Notificações',
-      //   'icon': Icons.notifications,
-      //   'page': NotificationsPage(),
-      //   'menus': [
-      //     {
-      //       'value': 'Todas notificações',
-      //       'page': NotificationsPage(),
-      //     }
-      //   ],
-      // },
-      // {
-      //   'value': 'Planos',
-      //   'icon': Icons.money,
-      //   'page': NotificationsPage(),
-      //   'menus': [
-      //     {
-      //       'value': 'Todas notificações',
-      //       'page': NotificationsPage(),
-      //     }
-      //   ],
-      // },
-      // {
-      //   'value': 'Cadastros',
-      //   'icon': Icons.add,
-      //   'menus': [
-      //     {
-      //       'value': 'Pais',
-      //       'page': CountryPage(),
-      //     },
-      //     {
-      //       'value': 'Estados',
-      //       'page': StatePage(),
-      //     },
-      //     {
-      //       'value': 'Cidades',
-      //       'page': CityPage(),
-      //     },
-      //     {
-      //       'value': 'Distritos',
-      //       'page': TownPage(),
-      //     },
-      //   ],
-      // },
-      // {
-      //   'value': 'Gerenciamento',
-      //   'icon': Icons.lock,
-      //   'menus': [
-      //     {
-      //       'value': 'Super Admin',
-      //       'page': NotificationsPage(),
-      //     },
-      //     {
-      //       'value': 'Admin Company',
-      //       'page': NotificationsPage(),
-      //     },
-      //     {
-      //       'value': 'Grupos',
-      //       'page': NotificationsPage(),
-      //     },
-      //   ],
-      // },
+      {
+        'value': 'Minhas compras',
+        'icon': Icons.shopping_cart_outlined,
+        'page': HistoryPage(),
+        // 'menus': [
+        //   {
+        //     'value': 'Cadastrar Estabelecimento',
+        //     'page': NewCompanyPage(),
+        //   }
+        // ],
+      },
       {
         'value': 'Tema',
         'icon': Icons.brightness_medium,
@@ -156,33 +86,6 @@ class _DashboardPageState extends State<DashboardPage> {
           });
         }
       },
-      // {
-      //   'value': 'Configurações',
-      //   'icon': Icons.settings,
-      //   'page': SettingsPage(),
-      //   'menus': [
-      //     {
-      //       'value': 'Aplicativos',
-      //       'page': VersionAppPage(),
-      //     },
-      //     {
-      //       'value': 'Endereço do estabelecimento',
-      //       'page': NotificationsPage(),
-      //     },
-      //     {
-      //       'value': 'Telefone de contato',
-      //       'page': PaymentTypesPage(),
-      //     },
-      //     {
-      //       'value': 'Formas de delivery',
-      //       'page': NotificationsPage(),
-      //     },
-      //     {
-      //       'value': 'Formas de pagamento',
-      //       'page': PaymentTypesPage(),
-      //     },
-      //   ],
-      // },
     ];
   }
 
@@ -191,7 +94,7 @@ class _DashboardPageState extends State<DashboardPage> {
     return Scaffold(
       body: Row(
         children: [
-          //Responsive(child: Container(), other: drawer()),
+          Responsive(child: Container(), other: drawer()),
           Expanded(
             child: Scaffold(
               appBar: AppBar(
@@ -211,14 +114,17 @@ class _DashboardPageState extends State<DashboardPage> {
                           : List.from(drawerItems[categoryIndex]['menus'])[
                               menuIndex - 1]['value'],
                   overflow: TextOverflow.fade,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 actions: [
                   MaterialButton(
                     child: Text(
                       CLOSE,
                       style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.white,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

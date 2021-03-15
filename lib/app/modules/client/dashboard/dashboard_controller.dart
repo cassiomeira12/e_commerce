@@ -23,7 +23,7 @@ class DashBoardController extends GetxController {
       case OkCancelResult.ok:
         var logout = await auth.logout();
         if (logout) {
-          return Get.offNamed('/client');
+          return Get.offNamed('/home');
         }
         return;
       case OkCancelResult.cancel:
