@@ -1,64 +1,55 @@
-import 'package:parse_server_sdk/parse_server_sdk.dart';
-
-import '../../models/address/small_town.dart';
-import '../../models/user.dart';
 import '../base_model.dart';
-import 'city.dart';
 
 class Address extends BaseModel<Address> {
-  User user;
-  String zipCode;
-  String neighborhood;
-  String street;
-  String number;
-  String reference;
-  City city;
-  ParseGeoPoint location;
-  SmallTown smallTown;
+  String bairro;
+  String cep;
+  String cidade;
+  String clienteURI = "/api/v1/cliente/103265/";
+  String complemento;
+  String endereco;
+  String estado;
+  String nome;
+  String numero;
+  String pais;
+  bool principal = true;
+  String referencia;
+  String resourceURI = "/api/v1/endereco/102512/";
 
   Address() : super('Address');
 
   Address.fromMap(Map<dynamic, dynamic> map) : super('Address') {
     baseFromMap(map);
-    user = map["user"] == null ? null : User.fromMap(map["user"]);
-    zipCode = map["zipCode"];
-    neighborhood = map["neighborhood"];
-    street = map["street"];
-    number = map["number"];
-    reference = map["reference"];
-    city = map["city"] == null ? null : City.fromMap(map["city"]);
-    location = map["location"];
-    smallTown =
-        map["smallTown"] == null ? null : SmallTown.fromMap(map["smallTown"]);
+    bairro = map['bairro'];
+    cep = map['cep'];
+    cidade = map['cidade'];
+    clienteURI = map['cliente'];
+    complemento = map['complemento'];
+    endereco = map['endereco'];
+    estado = map['estado'];
+    nome = map['nome'];
+    numero = map['numero'];
+    pais = map['pais'];
+    principal = map['principal'];
+    referencia = map['referencia'];
+    resourceURI = map['resource_uri'];
   }
 
   @override
   Map<String, dynamic> toMap() {
     var map = super.toMap();
-    map["user"] = user == null ? null : user.toPointer();
-    map["zipCode"] = zipCode;
-    map["neighborhood"] = neighborhood;
-    map["street"] = street;
-    map["number"] = number;
-    map["reference"] = reference;
-    map["city"] = city == null ? null : city.toPointer();
-    map["location"] = location;
-    map["smallTown"] = smallTown == null ? null : smallTown.toPointer();
-    return map;
-  }
-
-  @override
-  Map<String, dynamic> toMapData() {
-    var map = super.toMap();
-    map["user"] = user == null ? null : user.toMap();
-    map["zipCode"] = zipCode;
-    map["neighborhood"] = neighborhood;
-    map["number"] = number;
-    map["street"] = street;
-    map["reference"] = reference;
-    map["city"] = city == null ? null : city.toMap();
-    map["location"] = location;
-    map["smallTown"] = smallTown == null ? null : smallTown.toMap();
+    map['bairro'] = bairro;
+    map['cep'] = cep;
+    map['cidade'] = cidade;
+    map['cliente'] = clienteURI;
+    map['complemento'] = complemento;
+    map['endereco'] = endereco;
+    map['estado'] = estado;
+    map['nome'] = nome;
+    map['numero'] = numero;
+    map['pais'] = pais;
+    map['principal'] = principal;
+    map['referencia'] = referencia;
+    map['resource_uri'] = resourceURI;
     return map;
   }
 
@@ -69,14 +60,23 @@ class Address extends BaseModel<Address> {
     createdAt = item.createdAt;
     updatedAt = item.updatedAt;
 
-    user = item.user;
-    zipCode = item.zipCode;
-    neighborhood = item.neighborhood;
-    number = item.number;
-    street = item.street;
-    reference = item.reference;
-    city = item.city;
-    location = item.location;
-    smallTown = item.smallTown;
+    bairro = item.bairro;
+    cep = item.cep;
+    cidade = item.cidade;
+    clienteURI = item.clienteURI;
+    complemento = item.complemento;
+    endereco = item.endereco;
+    estado = item.estado;
+    nome = item.nome;
+    numero = item.numero;
+    pais = item.pais;
+    principal = item.principal;
+    referencia = item.referencia;
+    resourceURI = item.resourceURI;
+  }
+
+  @override
+  String toString() {
+    return "$endereco, $numero, $complemento, $cidade-$estado $cep";
   }
 }
