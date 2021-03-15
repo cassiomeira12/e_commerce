@@ -16,7 +16,7 @@ class ParseInit extends GetxController {
       liveQueryUrl: GlobalConfiguration().appConfig['SERVER_URL'],
       clientKey: GlobalConfiguration().appConfig['CLIENT_KEY'],
       autoSendSessionId: true,
-      debug: kDebugMode,
+      debug: kReleaseMode ? false : kDebugMode,
     );
     _initInstallation();
     parse.healthCheck();
