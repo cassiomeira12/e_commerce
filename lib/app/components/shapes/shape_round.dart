@@ -8,10 +8,11 @@ class ShapeRound extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width > 500
-          ? 500
-          : MediaQuery.of(context).size.width,
-      margin: EdgeInsets.only(top: 60, left: 20, right: 20, bottom: 20),
+      width: 500,
+      // width: MediaQuery.of(context).size.width > 500
+      //     ? 500
+      //     : MediaQuery.of(context).size.width,
+      //margin: EdgeInsets.only(top: 60, left: 20, right: 20, bottom: 20),
       decoration: BoxDecoration(
         color: Theme.of(context).backgroundColor,
         border: Border.all(

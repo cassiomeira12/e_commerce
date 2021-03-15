@@ -1,6 +1,6 @@
-import 'package:e_commerce/app/components/shapes/background_card.dart';
 import 'package:e_commerce/app/components/shapes/shape_round.dart';
 import 'package:e_commerce/app/shared/repositories/admin_service.dart';
+import 'package:e_commerce/app/styles/font_style.dart';
 import 'package:e_commerce/app/utils/strings/errors.dart';
 import 'package:e_commerce/app/utils/strings/strings.dart';
 import 'package:flutter/material.dart';
@@ -70,20 +70,47 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget body() {
-    return Stack(
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        BackgroundCard(),
-        bodyAppScrollView(),
+        MediaQuery.of(context).size.width > 800
+            ? Flexible(child: banner())
+            : Container(),
+        Flexible(
+          child: bodyAppScrollView(),
+        ),
       ],
     );
   }
 
+  Widget banner() {
+    return Container(
+      width: MediaQuery.of(context).size.width / 2,
+      height: MediaQuery.of(context).size.height,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          fit: BoxFit.cover,
+          image: AssetImage('assets/images/image_1.jpeg'),
+        ),
+      ),
+    );
+  }
+
   Widget bodyAppScrollView() {
-    return Center(
+    return Container(
+      width: MediaQuery.of(context).size.width > 800
+          ? MediaQuery.of(context).size.width / 2
+          : MediaQuery.of(context).size.width / 1.4,
+      height: MediaQuery.of(context).size.height,
+      alignment: Alignment.center,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          ShapeRound(child: _showForm()),
+          Container(
+            margin: EdgeInsets.all(20),
+            child: ShapeRound(child: _showForm()),
+          ),
         ],
       ),
     );
@@ -91,13 +118,15 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _showForm() {
     return Container(
-      padding: EdgeInsets.all(12.0),
+      padding: EdgeInsets.all(12),
       child: Form(
         key: _formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            SizedBox(height: 10),
+            Text("Administração", style: fontTitle(context)),
             showLogo(),
             googleButton(),
             SizedBox(height: 10),
@@ -113,7 +142,7 @@ class _LoginPageState extends State<LoginPage> {
         Hero(
           tag: APP_NAME,
           child: Padding(
-            padding: EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 0.0),
+            padding: EdgeInsets.only(top: 16),
             child: CircleAvatar(
               backgroundColor: Colors.transparent,
               radius: 100,
@@ -127,23 +156,20 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget googleButton() {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(60, 12, 60, 0),
-      child: SignInButton(
-        Buttons.Google,
-        text: "Login com o Google",
-        onPressed: () async {
-          try {
-            setState(() => _loading = true);
-            await controller.signInWithGoogle();
-            Get.offNamed('/admin/dashboard');
-          } catch (error) {
-            catchError(title: 'Erro ao fazer login', error: error);
-          } finally {
-            setState(() => _loading = false);
-          }
-        },
-      ),
+    return SignInButton(
+      Buttons.Google,
+      text: "Login com o Google",
+      onPressed: () async {
+        try {
+          setState(() => _loading = true);
+          await controller.signInWithGoogle();
+          Get.offNamed('/admin/dashboard');
+        } catch (error) {
+          catchError(title: 'Erro ao fazer login', error: error);
+        } finally {
+          setState(() => _loading = false);
+        }
+      },
     );
   }
 }

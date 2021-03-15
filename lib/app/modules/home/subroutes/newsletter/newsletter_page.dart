@@ -2,6 +2,7 @@ import 'package:e_commerce/app/components/custom_snackbar/custom_snackbar.dart';
 import 'package:e_commerce/app/components/generate_form/generate_form.dart';
 import 'package:e_commerce/app/modules/home/components/copyrigth.dart';
 import 'package:e_commerce/app/modules/home/subroutes/newsletter/newsletter_controller.dart';
+import 'package:e_commerce/app/styles/font_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 
@@ -18,29 +19,52 @@ class _NewsletterPageState extends State<NewsletterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          constraints: BoxConstraints(
-            minHeight: MediaQuery.of(context).size.height,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                width: 200,
-                height: 200,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage('assets/images/logo_app.png'),
-                  ),
+      body: Container(
+        constraints: BoxConstraints(
+          minHeight: MediaQuery.of(context).size.height,
+        ),
+        child: Row(
+          children: [
+            MediaQuery.of(context).size.width > 800
+                ? Flexible(child: banner())
+                : Container(),
+            Flexible(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: 200,
+                      height: 200,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage('assets/images/logo_only.png'),
+                        ),
+                      ),
+                    ),
+                    Text("Newsletter", style: fontTitle(context)),
+                    body(),
+                    CopyRigth(),
+                  ],
                 ),
               ),
-              body(),
-              CopyRigth(),
-            ],
-          ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget banner() {
+    return Container(
+      width: MediaQuery.of(context).size.width / 2,
+      height: MediaQuery.of(context).size.height,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          fit: BoxFit.cover,
+          image: AssetImage('assets/images/image_1.jpeg'),
         ),
       ),
     );

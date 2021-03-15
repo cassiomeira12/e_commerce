@@ -1,7 +1,6 @@
 import 'package:e_commerce/app/components/buttons/light_button.dart';
 import 'package:e_commerce/app/components/buttons/primary_button.dart';
 import 'package:e_commerce/app/components/buttons/secondary_button.dart';
-import 'package:e_commerce/app/components/shapes/background_card.dart';
 import 'package:e_commerce/app/components/shapes/shape_round.dart';
 import 'package:e_commerce/app/components/text_input/text_input_field.dart';
 import 'package:e_commerce/app/modules/company/login/login_controller.dart';
@@ -74,22 +73,45 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget body() {
-    return Stack(
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        BackgroundCard(),
-        bodyAppScrollView(),
+        MediaQuery.of(context).size.width > 800
+            ? Flexible(child: banner())
+            : Container(),
+        Flexible(
+          child: bodyAppScrollView(),
+        ),
       ],
     );
   }
 
+  Widget banner() {
+    return Container(
+      width: MediaQuery.of(context).size.width / 2,
+      height: MediaQuery.of(context).size.height,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          fit: BoxFit.cover,
+          image: AssetImage('assets/images/image_1.jpeg'),
+        ),
+      ),
+    );
+  }
+
   Widget bodyAppScrollView() {
-    return Center(
+    return Container(
+      width: MediaQuery.of(context).size.width / 2,
+      height: MediaQuery.of(context).size.height,
+      alignment: Alignment.center,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          ShapeRound(child: _showForm()),
-          //othersSignIns(),
-          SizedBox(height: 100),
+          Container(
+            margin: EdgeInsets.all(20),
+            child: ShapeRound(child: _showForm()),
+          ),
         ],
       ),
     );
