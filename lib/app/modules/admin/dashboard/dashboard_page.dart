@@ -1,8 +1,7 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:e_commerce/app/components/drawer/drawer_widget.dart';
 import 'package:e_commerce/app/components/responsive/responsive.dart';
-import 'package:e_commerce/app/modules/admin/dashboard/submodules/dashboard/dashboard_page.dart'
-    as Dashboard;
+import 'package:e_commerce/app/modules/admin/dashboard/submodules/settings/account/account_page.dart';
 import 'package:e_commerce/app/shared/repositories/auth_service.dart';
 import 'package:e_commerce/app/utils/strings/strings.dart';
 import 'package:flutter/material.dart';
@@ -13,14 +12,7 @@ import 'dashboard_controller.dart';
 import 'submodules/companies/companies_page.dart';
 import 'submodules/companies/new_company_page.dart';
 import 'submodules/notifications/notifications_page.dart';
-import 'submodules/registrations/city_page.dart';
-import 'submodules/registrations/country_page.dart';
-import 'submodules/registrations/state_page.dart';
-import 'submodules/registrations/town_page.dart';
-import 'submodules/report/report_page.dart';
-import 'submodules/settings/payment_types_page.dart';
-import 'submodules/settings/settings_page.dart';
-import 'submodules/settings/version_app_page.dart';
+import 'submodules/settings/admin/admin_page.dart';
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -31,7 +23,7 @@ class _DashboardPageState extends State<DashboardPage> {
   int selectedPage = 0, categoryIndex = 0, menuIndex = 0;
 
   List<dynamic> drawerItems;
-  List<dynamic> pages = List();
+  List<dynamic> pages = [];
 
   var auth = Get.find<AuthService>();
   var controller = DashBoardController();
@@ -43,10 +35,10 @@ class _DashboardPageState extends State<DashboardPage> {
       {
         'value': 'Dashboard',
         'icon': Icons.dashboard,
-        'page': Dashboard.DashboardPage(),
+        'page': CompaniesPage(),
       },
       {
-        'value': 'Estabelecimentos',
+        'value': 'Pedidos',
         'icon': Icons.home_work_rounded,
         'page': CompaniesPage(),
         'menus': [
@@ -56,79 +48,71 @@ class _DashboardPageState extends State<DashboardPage> {
           }
         ],
       },
-      {
-        'value': 'Relatórios',
-        'icon': Icons.insert_chart_outlined_sharp,
-        'page': ReportPage(),
-        'menus': [
-          {
-            'value': 'Relatório semanal',
-            'page': ReportPage(),
-          },
-          {
-            'value': 'Relatório mensal',
-            'page': ReportPage(),
-          },
-        ],
-      },
-      {
-        'value': 'Notificações',
-        'icon': Icons.notifications,
-        'page': NotificationsPage(),
-        'menus': [
-          {
-            'value': 'Todas notificações',
-            'page': NotificationsPage(),
-          }
-        ],
-      },
-      {
-        'value': 'Planos',
-        'icon': Icons.money,
-        'page': NotificationsPage(),
-        'menus': [
-          {
-            'value': 'Todas notificações',
-            'page': NotificationsPage(),
-          }
-        ],
-      },
-      {
-        'value': 'Cadastros',
-        'icon': Icons.add,
-        'menus': [
-          {
-            'value': 'Pais',
-            'page': CountryPage(),
-          },
-          {
-            'value': 'Estados',
-            'page': StatePage(),
-          },
-          {
-            'value': 'Cidades',
-            'page': CityPage(),
-          },
-          {
-            'value': 'Distritos',
-            'page': TownPage(),
-          },
-        ],
-      },
+      // {
+      //   'value': 'Relatórios',
+      //   'icon': Icons.insert_chart_outlined_sharp,
+      //   'page': ReportPage(),
+      //   'menus': [
+      //     {
+      //       'value': 'Relatório semanal',
+      //       'page': ReportPage(),
+      //     },
+      //     {
+      //       'value': 'Relatório mensal',
+      //       'page': ReportPage(),
+      //     },
+      //   ],
+      // },
+      // {
+      //   'value': 'Notificações',
+      //   'icon': Icons.notifications,
+      //   'page': NotificationsPage(),
+      //   'menus': [
+      //     {
+      //       'value': 'Todas notificações',
+      //       'page': NotificationsPage(),
+      //     }
+      //   ],
+      // },
+      // {
+      //   'value': 'Planos',
+      //   'icon': Icons.money,
+      //   'page': NotificationsPage(),
+      //   'menus': [
+      //     {
+      //       'value': 'Todas notificações',
+      //       'page': NotificationsPage(),
+      //     }
+      //   ],
+      // },
+      // {
+      //   'value': 'Cadastros',
+      //   'icon': Icons.add,
+      //   'menus': [
+      //     {
+      //       'value': 'Pais',
+      //       'page': CountryPage(),
+      //     },
+      //     {
+      //       'value': 'Estados',
+      //       'page': StatePage(),
+      //     },
+      //     {
+      //       'value': 'Cidades',
+      //       'page': CityPage(),
+      //     },
+      //     {
+      //       'value': 'Distritos',
+      //       'page': TownPage(),
+      //     },
+      //   ],
+      // },
       {
         'value': 'Gerenciamento',
         'icon': Icons.lock,
         'menus': [
           {
-            'value': 'Super Admin',
-            'page': NotificationsPage(),
-          },
-          {
-            'value': 'Admin Company',
-            'page': NotificationsPage(),
-          },
-          {
-            'value': 'Grupos',
+            'value': 'Clientes',
             'page': NotificationsPage(),
           },
         ],
@@ -170,28 +154,28 @@ class _DashboardPageState extends State<DashboardPage> {
       {
         'value': 'Configurações',
         'icon': Icons.settings,
-        'page': SettingsPage(),
+        'page': AccountPage(),
         'menus': [
           {
-            'value': 'Aplicativos',
-            'page': VersionAppPage(),
+            'value': 'Administradores',
+            'page': AdminPage(),
           },
-          {
-            'value': 'Endereço do estabelecimento',
-            'page': NotificationsPage(),
-          },
-          {
-            'value': 'Telefone de contato',
-            'page': PaymentTypesPage(),
-          },
-          {
-            'value': 'Formas de delivery',
-            'page': NotificationsPage(),
-          },
-          {
-            'value': 'Formas de pagamento',
-            'page': PaymentTypesPage(),
-          },
+          // {
+          //   'value': 'Endereço do estabelecimento',
+          //   'page': NotificationsPage(),
+          // },
+          // {
+          //   'value': 'Telefone de contato',
+          //   'page': PaymentTypesPage(),
+          // },
+          // {
+          //   'value': 'Formas de delivery',
+          //   'page': NotificationsPage(),
+          // },
+          // {
+          //   'value': 'Formas de pagamento',
+          //   'page': PaymentTypesPage(),
+          // },
         ],
       },
     ];
